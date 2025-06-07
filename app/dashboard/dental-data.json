@@ -1,0 +1,93 @@
+[
+  {
+    "date": "2025-05-22",
+    "amount": 33.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 97.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Kearny",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 97.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 299.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Kearny",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 691.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 2426.86,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Kearny",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 715.00,
+    "insuranceCompany": "Cigna",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 425.60,
+    "insuranceCompany": "UHC PPO",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 513.00,
+    "insuranceCompany": "UHC PPO",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 146.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Jersey City",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 962.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Jersey City",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 707.80,
+    "insuranceCompany": "Cigna",
+    "office": "Jersey City",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-22",
+    "amount": 294.40,
+    "insuranceCompany": "MetLife",
+    "office": "Union",
+    "status": "CLEARED"
+  }
+]
