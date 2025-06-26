@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { User } from '@supabase/supabase-js'
+import { useAutoLogout } from '@/hooks/use-auto-logout'
+import { LogoutWarningDialog } from '@/components/auth/logout-warning-dialog'
 
 // Loading component
 function AuthLoading() {
@@ -43,8 +45,29 @@ interface AuthGuardProps {
 export function AuthGuard({ children }: AuthGuardProps) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [showWarning, setShowWarning] = useState(false)
   const router = useRouter()
   const supabase = createClient()
+
+  const { resetTimer, logout } = useAutoLogout({
+    timeoutMinutes: 10, // Auto logout after 10 minutes
+    warningMinutes: 2,  // Show warning 2 minutes before logout
+    onWarning: () => setShowWarning(true),
+    onLogout: () => {
+      setShowWarning(false)
+      // The logout will be handled by the auth state change listener
+    }
+  })
+
+  const handleContinueSession = () => {
+    setShowWarning(false)
+    resetTimer() // Reset the timer when user chooses to continue
+  }
+
+  const handleLogoutNow = () => {
+    setShowWarning(false)
+    logout()
+  }
 
   useEffect(() => {
     // Get initial session
@@ -68,6 +91,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
         setLoading(false)
 
         if (event === 'SIGNED_OUT' || !session?.user) {
+          setShowWarning(false) // Hide warning dialog if shown
           router.push('/sign-in')
         }
       }
@@ -86,6 +110,16 @@ export function AuthGuard({ children }: AuthGuardProps) {
     return <Unauthorized />
   }
 
-  // User is authenticated, render children
-  return <>{children}</>
+  // User is authenticated, render children with auto-logout functionality
+  return (
+    <>
+      {children}
+      <LogoutWarningDialog
+        open={showWarning}
+        onContinue={handleContinueSession}
+        onLogout={handleLogoutNow}
+        warningMinutes={2}
+      />
+    </>
+  )
 }
