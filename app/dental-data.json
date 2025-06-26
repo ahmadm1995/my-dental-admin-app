@@ -1,9 +1,51 @@
 [
   {
+    "date": "2025-02-02",
+    "amount": 150.00,
+    "insuranceCompany": "Aetna",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-19",
+    "amount": 275.50,
+    "insuranceCompany": "UHC PPO",
+    "office": "Kearny",
+    "status": "PENDING"
+  },
+  {
+    "date": "2025-05-20",
+    "amount": 89.00,
+    "insuranceCompany": "Cigna",
+    "office": "Jersey City",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-20",
+    "amount": 455.75,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Union",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-20",
+    "amount": 1250.00,
+    "insuranceCompany": "MetLife",
+    "office": "Livingston",
+    "status": "DENIED"
+  },
+  {
     "date": "2025-05-21",
     "amount": 33.00,
     "insuranceCompany": "Horizon PPO",
     "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-21",
+    "amount": 198.25,
+    "insuranceCompany": "Aetna",
+    "office": "Kearny",
     "status": "CLEARED"
   },
   {
@@ -89,5 +131,54 @@
     "insuranceCompany": "MetLife",
     "office": "Union",
     "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-23",
+    "amount": 375.00,
+    "insuranceCompany": "Aetna",
+    "office": "Union",
+    "status": "PENDING"
+  },
+  {
+    "date": "2025-05-23",
+    "amount": 625.50,
+    "insuranceCompany": "UHC PPO",
+    "office": "Jersey City",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-24",
+    "amount": 110.00,
+    "insuranceCompany": "Cigna",
+    "office": "Kearny",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-24",
+    "amount": 890.25,
+    "insuranceCompany": "MetLife",
+    "office": "Livingston",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-27",
+    "amount": 225.00,
+    "insuranceCompany": "Horizon PPO",
+    "office": "Union",
+    "status": "CLEARED"
+  },
+  {
+    "date": "2025-05-27",
+    "amount": 567.80,
+    "insuranceCompany": "Aetna",
+    "office": "Jersey City",
+    "status": "DENIED"
+  },
+  {
+    "date": "2025-05-28",
+    "amount": 445.00,
+    "insuranceCompany": "UHC PPO",
+    "office": "Kearny",
+    "status": "PENDING"
   }
 ]

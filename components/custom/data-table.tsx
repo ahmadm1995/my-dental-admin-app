@@ -270,12 +270,20 @@ export function DataTable({
     pageSize: 10,
   })
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(undefined)
+  const [availableDatesPage, setAvailableDatesPage] = React.useState(0)
+  const datesPerPage = 3
+  
   const sortableId = React.useId()
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
     useSensor(KeyboardSensor, {})
   )
+
+  // Update data when props change
+  React.useEffect(() => {
+    setData(initialData)
+  }, [initialData])
 
   // Filter data based on selected date
   const filteredData = React.useMemo(() => {
@@ -294,6 +302,16 @@ export function DataTable({
     const dates = [...new Set(data.map(item => item.date))]
     return dates.sort()
   }, [data])
+
+  // Paginated dates
+  const paginatedAvailableDates = React.useMemo(() => {
+    const startIndex = availableDatesPage * datesPerPage
+    return availableDates.slice(startIndex, startIndex + datesPerPage)
+  }, [availableDates, availableDatesPage])
+
+  const totalPages = Math.ceil(availableDates.length / datesPerPage)
+  const hasNextPage = availableDatesPage < totalPages - 1
+  const hasPrevPage = availableDatesPage > 0
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(
     () => filteredData?.map((_, index) => index.toString()) || [],
@@ -365,9 +383,34 @@ export function DataTable({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <div className="p-3 border-b">
-                <p className="text-sm font-medium mb-2">Available dates in data:</p>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-sm font-medium">Available dates ({availableDates.length} total):</p>
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      onClick={() => setAvailableDatesPage(Math.max(0, availableDatesPage - 1))}
+                      disabled={!hasPrevPage}
+                    >
+                      <IconChevronLeft className="h-3 w-3" />
+                    </Button>
+                    <span className="text-xs text-muted-foreground px-1">
+                      {availableDates.length > 0 ? availableDatesPage + 1 : 0}/{totalPages}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      onClick={() => setAvailableDatesPage(Math.min(totalPages - 1, availableDatesPage + 1))}
+                      disabled={!hasNextPage}
+                    >
+                      <IconChevronRight className="h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
                 <div className="flex flex-wrap gap-1">
-                  {availableDates.map(dateStr => {
+                  {paginatedAvailableDates.map(dateStr => {
                     // Create date in local timezone to avoid timezone issues
                     const [year, month, day] = dateStr.split('-')
                     const localDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))

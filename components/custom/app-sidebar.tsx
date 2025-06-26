@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   IconCamera,
   IconChartBar,
@@ -19,10 +20,10 @@ import {
   IconUsers,
 } from "@tabler/icons-react"
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from "@/components/custom/nav-documents"
+import { NavMain } from "@/components/custom/nav-main"
+import { NavSecondary } from "@/components/custom/nav-secondary"
+import { NavUser } from "@/components/custom/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -42,14 +43,40 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
-    // {
-    //   title: "Lifecycle",
-    //   url: "#",
-    //   icon: IconListDetails,
-    // },
+    {
+      title: "Offices",
+      url: "#",
+      icon: IconListDetails,
+      items: [
+        {
+          title: "Livingston",
+          url: "/dashboard/offices/livingston",
+        },
+        {
+          title: "Kearny", 
+          url: "/dashboard/offices/kearny",
+        },
+        {
+          title: "Union",
+          url: "/dashboard/offices/union",
+        },
+        {
+          title: "Jersey City",
+          url: "/dashboard/offices/jersey-city",
+        },
+        {
+          title: "Middletown",
+          url: "/dashboard/offices/middletown",
+        },
+        {
+          title: "Passaic",
+          url: "/dashboard/offices/passaic",
+        },
+      ],
+    },
     // {
     //   title: "Analytics",
     //   url: "#",
@@ -160,10 +187,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link href="#">
                 <IconInnerShadowTop className="!size-5" />
                 <span className="text-base font-semibold">My Dental Admin</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
