@@ -60,7 +60,7 @@ export function LogoutWarningDialog({
           <AlertDialogTitle>Session Expiring Soon</AlertDialogTitle>
           <AlertDialogDescription>
             Your session will expire in <strong>{formatTime(timeLeft)}</strong> due to inactivity.
-            Click "Stay Logged In" to continue your session.
+            Click Stay Logged In to continue your session.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

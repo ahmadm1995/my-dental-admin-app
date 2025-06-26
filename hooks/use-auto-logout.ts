@@ -17,8 +17,8 @@ export function useAutoLogout({
   onWarning,
   onLogout
 }: UseAutoLogoutProps = {}) {
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  const warningTimeoutRef = useRef<NodeJS.Timeout>()
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const warningTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const supabase = createClient()
 
   const logout = useCallback(async () => {
