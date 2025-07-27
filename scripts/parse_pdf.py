@@ -7,7 +7,7 @@ import pdfplumber
 import re
 
 def parse_deposit_transactions(text):
-    """Parse deposit transactions from Provident Bank statement text"""
+    """Parse deposit transactions from Provident Bank statement texts"""
     deposits = []
     lines = text.split('\n')
     
