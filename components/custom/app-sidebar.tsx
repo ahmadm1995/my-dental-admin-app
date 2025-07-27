@@ -18,6 +18,8 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  IconFileUpload,  // Add this import
+  IconCreditCard,  // Add this import
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/custom/nav-documents"
@@ -74,6 +76,21 @@ const data = {
         {
           title: "Passaic",
           url: "/dashboard/offices/passaic",
+        },
+      ],
+    },
+    {
+      title: "Bank Statements",
+      url: "#",
+      icon: IconCreditCard,
+      items: [
+        {
+          title: "Upload Statement",
+          url: "/dashboard/bank-statements/upload",
+        },
+        {
+          title: "View History",
+          url: "/dashboard/bank-statements/history",
         },
       ],
     },
