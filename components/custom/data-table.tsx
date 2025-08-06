@@ -486,10 +486,10 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
+          {/* <Button variant="outline" size="sm">
             <IconPlus />
             <span className="hidden lg:inline">Add Transaction</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
       

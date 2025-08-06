@@ -14,7 +14,39 @@ interface Deposit {
   amount: number
 }
 
-async function processPDFWithPython(buffer: Buffer): Promise<any> {
+/**
+ * Extract office name from PDF filename
+ * @param filename - The uploaded PDF filename
+ * @returns The office name or null if not found
+ */
+function extractOfficeFromFilename(filename: string): string | null {
+  // Remove file extension and convert to uppercase for easier matching
+  const nameWithoutExt = filename.replace(/\.pdf$/i, '').toUpperCase()
+  
+  // Define office mappings - order matters for longer names first
+  const officeNames = [
+    'JERSEY CITY',
+    'HACKENSACK', 
+    'LIVINGSTON',
+    'KEARNY',
+    'UNION'
+  ]
+  
+  // Find the first office name that appears in the filename
+  for (const office of officeNames) {
+    if (nameWithoutExt.includes(office)) {
+      // Return in proper case
+      return office.toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+    }
+  }
+  
+  return null
+}
+
+async function processPDFWithPython(buffer: Buffer, filename: string): Promise<any> {
   // Create a temporary file with a more unique name
   const tempDir = '/tmp'
   const tempFileName = `statement-${Date.now()}-${Math.random().toString(36).substr(2, 9)}.pdf`
@@ -27,8 +59,8 @@ async function processPDFWithPython(buffer: Buffer): Promise<any> {
     // Get the path to the Python script
     const scriptPath = path.join(process.cwd(), 'scripts', 'parse_pdf.py')
     
-    // Execute Python script
-    const { stdout, stderr } = await execAsync(`python3 ${scriptPath} ${tempFilePath}`)
+    // Execute Python script with filename parameter
+    const { stdout, stderr } = await execAsync(`python3 ${scriptPath} ${tempFilePath} "${filename}"`)
     
     if (stderr) {
       console.error('Python script error:', stderr)
@@ -71,12 +103,15 @@ export async function POST(request: NextRequest) {
       )
     }
     
+    // Extract office from filename
+    const officeFromFilename = extractOfficeFromFilename(file.name)
+    
     // Convert file to buffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     
     // Process PDF with Python script
-    const result = await processPDFWithPython(buffer)
+    const result = await processPDFWithPython(buffer, file.name)
     
     // Check if Python script returned an error
     if (result.error) {
@@ -85,6 +120,14 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+    
+    // Override the office with the one extracted from filename
+    // If filename extraction failed, fall back to the Python script result
+    result.office = officeFromFilename || result.office || 'Unknown'
+    
+    // Add filename info to the response for debugging
+    result.filename = file.name
+    result.officeSource = officeFromFilename ? 'filename' : 'pdf_content'
     
     return NextResponse.json(result)
     
